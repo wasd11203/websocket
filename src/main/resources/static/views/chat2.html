@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat Room</title>
+
+    <link rel="stylesheet" type="text/css" href="bower_component/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="styles/base.css">
+    <link rel="stylesheet" type="text/css" href="styles/chat/chat.css">
+
+    <script src="bower_component/jquery/dist/jquery.js"></script>
+    <script src="bower_component/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="https://cdn.jsdelivr.net/sockjs/1/sockjs.min.js"></script>
+    <script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.js"></script>
+
+    <script src="javascripts/chat/chat2.js"></script>
+
+</head>
+<body>
+<h2 class="page-header text-center">Welcome To Private Chat Room 2!</h2>
+<div class="containter">
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 message">
+
+            <div class="row message-history">
+                <div class="col-md-12">
+
+                    <div class="row">
+                        <div class="col-md-12">
+
+                            <div class="row other-history">
+                                <div class="col-md-2 pull-left">
+                                    <span class="icon">头像</span>
+                                </div>
+
+                                <div class="col-md-8 pull-left">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="name">昵称</span>
+                                        </div>
+                                    </div>
+                                    <div class="row history-message-content">
+                                        <div class="col-md-12">
+                                            聊天内容
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row self-history">
+                                <div class="col-md-2 pull-right">
+                                    <span class="icon">头像</span>
+                                </div>
+                                <div class="col-md-8 pull-right">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <span class="name pull-right">昵称</span>
+                                        </div>
+                                    </div>
+                                    <div class="row history-message-content">
+                                        <div class="col-md-12">
+                                            聊天内容
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+            <div class="row message-send">
+                <div class="col-md-12">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <input type="text" id="username" class="form-control" placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <textarea class="form-control" id="message" rows="3" placeholder="请输入聊天内容" name="message"></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <button type="button" class="btn btn-primary col-sm-2 pull-right" onclick="sendMessage();">发送</button>
+                                <button type="button" class="btn btn-primary col-sm-2 pull-right exit" onclick="" >退出</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

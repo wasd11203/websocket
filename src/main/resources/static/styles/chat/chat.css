@@ -1,0 +1,41 @@
+
+.message{
+    border:1px solid #ddd;
+    border-radius:5px;
+    box-shadow: 2px 2px 2px #ddd;
+}
+
+.message-history{
+
+    min-height: 400px;
+    max-height:800px;
+}
+
+.other-history,.self-history{
+    margin-top:15px;
+}
+
+.history-message-content{
+    margin-top:4px;
+    border:1px solid #ddd;
+    border-radius:5px;
+    padding:4px;
+}
+
+.other-history .history-message-content{
+    background:#fff;
+}
+
+.self-history .history-message-content{
+
+    background:#337ab7;
+}
+
+.message-send{
+    padding-top:15px;
+    border-top:1px solid #ddd;
+}
+
+.exit{
+    margin-right:10px;
+}
