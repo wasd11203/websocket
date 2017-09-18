@@ -1,56 +1,62 @@
 /**
  * Created by AA on 2017/9/5
- * 私聊
+ * 群聊
  *
  */
 'use strict';
 
-$(function(){
-    connect();
-});
+var websocket = null;
 
-// websocket 客户端
-var stompClient = null;
-
-/**
- * 连接websocket服务端
- */
-function connect() {
-    var socket = new SockJS('/back/endpoint');
-    stompClient = Stomp.over(socket);
-    stompClient.connect({}, function (frame) {
-        var uId = 2;
-        console.log('Connected:' + frame);
-        stompClient.subscribe('private/'+uId+'/privatechat', function (response) {
-            showAcceptMessage(JSON.parse(response.body));
-        })
-    });
+//判断当前浏览器是否支持WebSocket
+if ('WebSocket' in window) {
+    websocket = new WebSocket("ws://localhost:8080/back/endpoint");
+} else {
+    alert('Not support websocket');
 }
 
-/**
- * 断开websocket连接
- */
-function disconnect() {
-    if (stompClient != null) {
-        stompClient.disconnect();
-    }
-    console.log('Disconnected');
-}
-
-/**
- * 发送消息
- */
+// 发送消息
 function sendMessage() {
-    var uId = 1;
-    var username = $("#username").val();
     var message = $("#message").val();
-    stompClient.send("/private/"+uId+"/privatechat", {}, JSON.stringify({'uId': uId, 'username': username, 'message': message}));
+    websocket.send(message);
 }
 
-/**
- * 接收返回消息
- * @param message
- */
-function showAcceptMessage(message) {
-    console.log(message);
+// 退出聊天
+function closeWebSocket() {
+    websocket.close();
 }
+
+//连接成功建立的回调方法
+websocket.onopen = function (event) {
+    console.log("建立连接");
+}
+
+//接收到消息的回调方法
+websocket.onmessage = function (event) {
+    setMessageInnerHTML(event.data);
+}
+
+//连接关闭的回调方法
+websocket.onclose = function () {
+    console.log("断开连接");
+}
+
+//连接发生错误的回调方法
+websocket.onerror = function () {
+    console.log("网络异常");
+};
+
+//监听窗口关闭事件，当窗口关闭时，主动去关闭websocket连接，防止连接还没断开就关闭窗口，server端会抛异常。
+window.onbeforeunload = function () {
+    websocket.close();
+}
+
+//将消息显示在网页上
+function setMessageInnerHTML(message) {
+    if(message.indexOf("SELF")!= -1){
+        console.log("自身发送消息",message);
+    }else{
+        console.log("其他发送消息",message);
+    }
+}
+
+
